@@ -1,0 +1,28 @@
+v-cloak {
+    display: none;
+}
+#app {
+    padding: 40px;
+}
+.alert {
+    margin: 0 0 20px;
+}
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 0 50px;
+}
+.form-group {
+    width: 49%;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+.form-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+.form .btn {
+    width: 250px;
+}

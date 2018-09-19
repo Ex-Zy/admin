@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Basic components</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <div id="app" v-cloak>
+
+    <template>
+      <div v-if="noUserData" class="alert alert-warning">Нет данных пользователя</div>
+      <user-edit v-else :user="userItem" />
+    </template>
+
+    <template>
+      <div v-if="noUsers" class="alert alert-warning">Пользователей нет</div>
+      <user-list v-else :users="users"/>
+    </template>
+
+  </div>
+
+  <!-- template input -->
+  <script type="text/x-template" id="input-tmp">
+    <div class="form-group">
+      <label for="input-1">{{label}}</label>
+      <input type="text" class="form-control" id="input-1" :value="value" @input="inputHandler">
+    </div>
+  </script>
+
+  <!-- template userEdit -->
+  <script type="text/x-template" id="user-edit-tmp">
+    <form class="form">
+      <form-input id="input-1" label="First name" v-model="user.firstName"/>
+      <form-input id="input-2" label="Middle name" v-model="user.middleName"/>
+      <form-input id="input-3" label="Last name" v-model="user.lastName"/>
+      <form-input id="input-4" label="Age" v-model="user.age"/>
+      <form-input id="input-5" label="Gender" v-model="user.gender"/>
+
+      <div class="form-bottom">
+        <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+      </div>
+    </form>
+  </script>
+
+  <!-- template userList -->
+  <script type="text/x-template" id="table-users">
+    <table class="table table-bordered table-dark">
+      <thead>
+      <tr>
+        <th>Имя</th>
+        <th>Отчество</th>
+        <th>Фамилия</th>
+        <th>Возраст</th>
+        <th>Пол</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr
+        v-for="(user, index) in users"
+        :key="index">
+
+        <td>{{user.firstName}}</td>
+        <td>{{user.middleName}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.age}}</td>
+        <td>{{user.gender}}</td>
+
+      </tr>
+      </tbody>
+    </table>
+  </script>
+
+  <script src="js/vue.js"></script>
+  <script>
+    const userList = {
+      template: '#table-users',
+      props: {
+        users: {
+          type: Array,
+          requred: true
+        }
+      }
+    };
+    const formInput = {
+      template: '#input-tmp',
+      model: {
+        prop: 'value',
+        event: 'update:value'
+      },
+      props: {
+        label: {
+          type: String,
+          default: 'Base label'
+        },
+        value: {
+          type: [String, Number],
+          required: true
+        },
+        id: {
+          type: [Number, String],
+          required: true
+        }
+      },
+      methods: {
+        inputHandler($event) {
+          this.$emit('update:value', $event.target.value);
+        }
+      }
+    };
+    const userEdit = {
+      template: '#user-edit-tmp',
+      components: {
+        'form-input': formInput
+      },
+      props: {
+        user: {
+          type: Object,
+          required: true
+        }
+      }
+    };
+    const app = new Vue({
+      el: '#app',
+      components: {
+        'user-list': userList,
+        'user-edit': userEdit
+      },
+      data() {
+        return {
+          users: [
+            {
+              firstName: 'Sergey',
+              middleName: 'Sergeevich',
+              lastName: 'Nagornykh',
+              age: 25,
+              gender: 'male'
+            },
+            {
+              firstName: 'Maksim',
+              middleName: 'Olegovich',
+              lastName: 'Tymoshenko',
+              age: 28,
+              gender: 'male'
+            },
+            {
+              firstName: 'Marusya',
+              middleName: 'Fedorovna',
+              lastName: 'Dragan',
+              age: 26,
+              gender: 'female'
+            },
+            {
+              firstName: 'Vika',
+              middleName: 'Oleksandrovna',
+              lastName: 'Polyantskaya',
+              age: 32,
+              gender: 'female'
+            },
+            {
+              firstName: 'Oleg',
+              middleName: 'Vasilevich',
+              lastName: 'Ogyrtsov',
+              age: 42,
+              gender: 'male'
+            }
+          ],
+          userItem: {
+            firstName: 'Sergey',
+            middleName: 'Sergeevich',
+            lastName: 'Nagornykh',
+            age: 25,
+            gender: 'male'
+          }
+        }
+      },
+      computed: {
+        noUsers() {
+          return this.users.length === 0;
+        },
+        noUserData() {
+          return Object.keys(this.userItem).length === 0;
+        }
+      }
+    });
+  </script>
+</body>
+</html>
