@@ -1,7 +1,7 @@
 <template>
   <nav class="blue darken-2">
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Vue app</a>
+      <router-link to="/" class="brand-logo">Vue app</router-link>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <router-link
           v-for="link in links"

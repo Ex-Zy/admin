@@ -27,13 +27,13 @@ export default {
           title: "Home"
         },
         {
-          path: "/about",
-          title: "About"
-        },
-        {
           path: "/users",
           title: "Users"
-        }
+        },
+        {
+          path: "/edit",
+          title: "Edit"
+        },
       ]
     };
   }
