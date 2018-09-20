@@ -3,11 +3,18 @@
     <thead>
       <tr>
         <slot name="header">
-          <th>Имя</th>
-          <th>Отчество</th>
-          <th>Фамилия</th>
-          <th>Возраст</th>
-          <th>Пол</th>
+          <td>id</td>
+          <td>FirstName</td>
+          <td>LastName</td>
+          <td>Age</td>
+          <td>Balance</td>
+          <td>Active</td>
+          <td>Avatar</td>
+          <td>Account</td>
+          <td>Company</td>
+          <td>Email</td>
+          <td>Phone</td>
+          <td>Address</td>
         </slot>
       </tr>
     </thead>
@@ -17,11 +24,18 @@
           v-for="(user, index) in users"
           :key="index">
 
+          <td>{{user.id}}</td>
           <td>{{user.firstName}}</td>
-          <td>{{user.middleName}}</td>
           <td>{{user.lastName}}</td>
           <td>{{user.age}}</td>
-          <td>{{user.gender}}</td>
+          <td>{{user.balance}}</td>
+          <td>{{user.isActive}}</td>
+          <td>{{user.picture}}</td>
+          <td>{{user.accessLevel}}</td>
+          <td>{{user.company}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.phone}}</td>
+          <td>{{user.address}}</td>
 
         </tr>
       </slot>
