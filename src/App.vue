@@ -29,6 +29,10 @@ export default {
         {
           path: "/about",
           title: "About"
+        },
+        {
+          path: "/users",
+          title: "Users"
         }
       ]
     };
@@ -37,4 +41,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.page {
+  padding: 0 10px;
+}
 </style>
