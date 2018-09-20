@@ -14,8 +14,11 @@
 </template>
 
 <script>
+import axios from "axios";
 import VTable from "@/components/v-table.vue";
 import VAlert from "@/components/v-alert.vue";
+
+const url = "http://localhost:3004/users";
 
 export default {
   name: "Users",
@@ -25,50 +28,25 @@ export default {
   },
   data() {
     return {
-      userList: [
-        {
-          firstName: "Sergey",
-          middleName: "Sergeevich",
-          lastName: "Nagornykh",
-          age: 25,
-          gender: "male"
-        },
-        {
-          firstName: "Maksim",
-          middleName: "Olegovich",
-          lastName: "Tymoshenko",
-          age: 28,
-          gender: "male"
-        },
-        {
-          firstName: "Marusya",
-          middleName: "Fedorovna",
-          lastName: "Dragan",
-          age: 26,
-          gender: "female"
-        },
-        {
-          firstName: "Vika",
-          middleName: "Oleksandrovna",
-          lastName: "Polyantskaya",
-          age: 32,
-          gender: "female"
-        },
-        {
-          firstName: "Oleg",
-          middleName: "Vasilevich",
-          lastName: "Ogyrtsov",
-          age: 42,
-          gender: "male"
-        }
-      ],
+      userList: [],
       alertType: "warning",
       alertMessage: "Загрузка пользователей"
     };
   },
+  mounted() {
+    this.getUsers(url);
+  },
   computed: {
     noUsers() {
       return this.userList.length === 0;
+    }
+  },
+  methods: {
+    getUsers(url) {
+      axios
+        .get(url)
+        .then(({ data }) => (this.userList = data))
+        .catch(e => console.error(e));
     }
   }
 };
