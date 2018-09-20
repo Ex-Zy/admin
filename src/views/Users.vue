@@ -1,18 +1,27 @@
 <template>
   <div class="page">
     <h4 class="center-align">Brief information about users</h4>
-
-    <v-table :users="userList"></v-table>
+    
+    <v-alert 
+      v-if="noUsers" 
+      :title="alertMessage" 
+      :type="alertType"/>
+    
+    <v-table 
+      v-else 
+      :users="userList"></v-table>
   </div>
 </template>
 
 <script>
 import VTable from "@/components/v-table.vue";
+import VAlert from "@/components/v-alert.vue";
 
 export default {
   name: "Users",
   components: {
-    VTable
+    VTable,
+    VAlert
   },
   data() {
     return {
@@ -52,8 +61,15 @@ export default {
           age: 42,
           gender: "male"
         }
-      ]
+      ],
+      alertType: "warning",
+      alertMessage: "Загрузка пользователей"
     };
+  },
+  computed: {
+    noUsers() {
+      return this.userList.length === 0;
+    }
   }
 };
 </script>
