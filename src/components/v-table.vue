@@ -1,46 +1,48 @@
 <template>
-  <table class="highlight">
-    <thead>
+  <div class="grid">
+    <table class="grid__table highlight">
+      <thead>
       <tr>
         <slot name="header">
-          <td>id</td>
-          <td>FirstName</td>
-          <td>LastName</td>
-          <td>Age</td>
-          <td>Balance</td>
-          <td>Active</td>
-          <td>Avatar</td>
-          <td>Account</td>
-          <td>Company</td>
-          <td>Email</td>
-          <td>Phone</td>
-          <td>Address</td>
+          <th class="grid__col-top">id</th>
+          <th class="grid__col-top">FirstName</th>
+          <th class="grid__col-top">LastName</th>
+          <th class="grid__col-top">Age</th>
+          <th class="grid__col-top">Balance</th>
+          <th class="grid__col-top">Active</th>
+          <th class="grid__col-top">Avatar</th>
+          <th class="grid__col-top">Account</th>
+          <th class="grid__col-top">Company</th>
+          <th class="grid__col-top">Email</th>
+          <th class="grid__col-top">Phone</th>
+          <th class="grid__col-top">Address</th>
         </slot>
       </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
       <slot name="body">
         <tr
           v-for="(user, index) in users"
           :key="index">
 
-          <td>{{user.id}}</td>
-          <td>{{user.firstName}}</td>
-          <td>{{user.lastName}}</td>
-          <td>{{user.age}}</td>
-          <td>{{user.balance}}</td>
-          <td>{{user.isActive}}</td>
-          <td>{{user.picture}}</td>
-          <td>{{user.accessLevel}}</td>
-          <td>{{user.company}}</td>
-          <td>{{user.email}}</td>
-          <td>{{user.phone}}</td>
-          <td>{{user.address}}</td>
+          <td class="grid__col">{{user.id}}</td>
+          <td class="grid__col">{{user.firstName}}</td>
+          <td class="grid__col">{{user.lastName}}</td>
+          <td class="grid__col">{{user.age}}</td>
+          <td class="grid__col">{{user.balance}}</td>
+          <td class="grid__col">{{user.isActive}}</td>
+          <td class="grid__col">{{user.picture}}</td>
+          <td class="grid__col">{{user.accessLevel}}</td>
+          <td class="grid__col">{{user.company}}</td>
+          <td class="grid__col">{{user.email}}</td>
+          <td class="grid__col">{{user.phone}}</td>
+          <td class="grid__col">{{user.address}}</td>
 
         </tr>
       </slot>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
@@ -55,5 +57,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.grid {
+  overflow: auto;
+  &__table {
+    min-width: 1400px;
+  }
+  &__col-top {
+    font-weight: 600;
+  }
+}
 </style>
