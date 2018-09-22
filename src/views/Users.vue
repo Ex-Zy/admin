@@ -30,7 +30,7 @@ export default {
     return {
       userList: [],
       alertType: "warning",
-      alertMessage: "Загрузка пользователей"
+      alertMessage: "Loading users..."
     };
   },
   mounted() {

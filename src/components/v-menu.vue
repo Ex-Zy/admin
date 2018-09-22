@@ -31,5 +31,6 @@ export default {
 <style lang="scss" scoped>
 .brand-logo {
   left: 10px;
+  transform: none;
 }
 </style>

@@ -33,7 +33,7 @@ export default {
         {
           path: "/edit",
           title: "Edit"
-        },
+        }
       ]
     };
   }
