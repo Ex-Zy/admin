@@ -7,9 +7,15 @@
       :title="alertMessage"
       :type="alertType"/>
     
-    <v-form 
-      :user="userInfo"></v-form>
-    
+    <v-form
+      v-else
+      v-model="user"/>
+
+    <div class="buttons-wrp">
+      <v-button type="secondary">Cancel</v-button>
+      <v-button type="primary">Update</v-button>
+    </div>
+
   </div>
 </template>
 
@@ -17,16 +23,18 @@
 import axios from "axios";
 import VForm from "@/components/v-form.vue";
 import VAlert from "@/components/v-alert.vue";
+import VButton from "@/components/v-button.vue";
 
 export default {
   name: "Edit",
   components: {
     VForm,
-    VAlert
+    VAlert,
+    VButton
   },
   data() {
     return {
-      userInfo: {},
+      user: null,
       alertMessage: "Loading user data...",
       alertType: "warning"
     };
@@ -36,19 +44,35 @@ export default {
   },
   computed: {
     noUser() {
-      return Object.keys(this.userInfo).length === 0;
+      return !this.user;
+    },
+    id() {
+      return this.$route.params.id;
+    },
+    url() {
+      return `http://localhost:3004/users/${this.id}`;
     }
   },
   methods: {
     loadUser() {
       axios
-        .get("http://localhost:3004/users/1")
-        .then(({ data }) => (this.userInfo = data))
+        .get(this.url)
+        .then(({ data }) => (this.user = data))
         .catch(e => console.error(e));
+    },
+    formHandler($event) {
+      console.log($event, 123);
     }
   }
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.buttons-wrp {
+  text-align: center;
+  padding: 0 0 40px;
+  .btn + .btn {
+    margin-left: 15px;
+  }
+}
 </style>

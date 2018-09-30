@@ -1,5 +1,5 @@
 <template>
-  <nav class="blue darken-2">
+  <nav class="light-blue darken-4">
     <div class="nav-wrapper">
       <router-link to="/" class="brand-logo">Vue app</router-link>
       <ul id="nav-mobile" class="right hide-on-med-and-down">

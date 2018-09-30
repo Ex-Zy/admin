@@ -23,16 +23,8 @@ export default {
     return {
       links: [
         {
-          path: "/",
-          title: "Home"
-        },
-        {
           path: "/users",
           title: "Users"
-        },
-        {
-          path: "/edit",
-          title: "Edit"
         }
       ]
     };
