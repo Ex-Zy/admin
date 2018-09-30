@@ -25,6 +25,10 @@ export default {
         {
           path: "/users",
           title: "Users"
+        },
+        {
+          path: "/add",
+          title: "Add user"
         }
       ]
     };
