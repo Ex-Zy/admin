@@ -21,6 +21,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.btn {
+  min-width: 90px;
+}
 .btn-primary {
   background: #039be5;
   &:hover {

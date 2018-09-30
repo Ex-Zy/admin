@@ -10,10 +10,10 @@
     <v-form
       v-else
       v-model="user"/>
-
+    
     <div class="buttons-wrp">
-      <v-button type="secondary">Cancel</v-button>
-      <v-button type="primary">Update</v-button>
+      <v-button type="danger" @click.native="removeUser">Delete</v-button>
+      <v-button type="primary" @click.native="saveUser">Save</v-button>
     </div>
 
   </div>
@@ -60,8 +60,26 @@ export default {
         .then(({ data }) => (this.user = data))
         .catch(e => console.error(e));
     },
-    formHandler($event) {
-      console.log($event, 123);
+    saveUser() {
+      axios
+        .patch(this.url, this.user)
+        .then(() => {
+          console.info("Сохранено успешно");
+          this.redirectToUsers();
+        })
+        .catch(e => console.error(e));
+    },
+    removeUser() {
+      axios
+        .delete(this.url)
+        .then(() => {
+          console.info("Удалено");
+          this.redirectToUsers();
+        })
+        .catch(e => console.error(e));
+    },
+    redirectToUsers() {
+      this.$router.push("/users");
     }
   }
 };

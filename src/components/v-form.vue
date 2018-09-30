@@ -19,7 +19,7 @@ export default {
   },
   model: {
     prop: "user",
-    handler: "update:user"
+    event: "update:user"
   },
   props: {
     user: {
