@@ -14,11 +14,9 @@
 </template>
 
 <script>
-import axios from "axios";
-import VTable from "@/components/v-table.vue";
-import VAlert from "@/components/v-alert.vue";
-
-const url = "http://localhost:3004/users";
+import axios from "@/helpers/shortUrlToServer";
+import VTable from "@/components/v-table";
+import VAlert from "@/components/v-alert";
 
 export default {
   name: "Users",
@@ -34,7 +32,7 @@ export default {
     };
   },
   mounted() {
-    this.getUsers(url);
+    this.getUsers("/users");
   },
   computed: {
     noUsers() {

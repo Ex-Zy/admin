@@ -20,10 +20,10 @@
 </template>
 
 <script>
-import axios from "axios";
-import VForm from "@/components/v-form.vue";
-import VAlert from "@/components/v-alert.vue";
-import VButton from "@/components/v-button.vue";
+import axios from "@/helpers/shortUrlToServer";
+import VForm from "@/components/v-form";
+import VAlert from "@/components/v-alert";
+import VButton from "@/components/v-button";
 
 export default {
   name: "Edit",
@@ -50,7 +50,7 @@ export default {
       return this.$route.params.id;
     },
     url() {
-      return `http://localhost:3004/users/${this.id}`;
+      return `/users/${this.id}`;
     }
   },
   methods: {

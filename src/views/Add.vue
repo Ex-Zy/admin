@@ -2,26 +2,32 @@
   <div class="page">
     <h4 class="center-align">Add user</h4>
 
+    <v-alert
+      v-if="noUser"
+      :title="alertMessage"
+      :type="alertType"/>
+
     <v-form
+      v-else
       v-model="user"/>
 
     <div class="buttons-wrp">
-      <v-button type="secondary">Cancel</v-button>
-      <v-button type="primary">Save</v-button>
+      <v-button type="secondary" @click.native="resetUser">Cancel</v-button>
+      <v-button type="primary" @click.native="saveUser">Save</v-button>
     </div>
 
   </div>
 </template>
 
 <script>
-// import axios from "axios";
-import VForm from "@/components/v-form.vue";
-import VAlert from "@/components/v-alert.vue";
-import VButton from "@/components/v-button.vue";
+import axios from "@/helpers/shortUrlToServer";
+import VForm from "@/components/v-form";
+import VAlert from "@/components/v-alert";
+import VButton from "@/components/v-button";
 
 const emptyUser = {
-  id: "",
-  isActive: "",
+  id: 0,
+  isActive: false,
   balance: "",
   picture: "",
   age: "",
@@ -45,15 +51,35 @@ export default {
   },
   data() {
     return {
-      user: null
+      user: null,
+      alertMessage: "Loading user data...",
+      alertType: "warning"
     };
   },
-  created() {
+  mounted() {
     this.mergeUser();
+  },
+  computed: {
+    noUser() {
+      return !this.user;
+    }
   },
   methods: {
     mergeUser() {
       this.user = Object.assign({}, emptyUser);
+    },
+    saveUser() {
+      axios
+        .post("/users", this.user)
+        .then(() => {
+          console.info("Пользователь создан успешно");
+          this.redirectToUsers();
+        })
+        .catch(e => console.error(e));
+    },
+    resetUser() {
+      console.info("Отмена");
+      this.redirectToUsers();
     },
     redirectToUsers() {
       this.$router.push("/users");
