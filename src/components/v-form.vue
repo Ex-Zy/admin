@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import VInput from "@/components/v-input.vue";
+import VInput from "@/components/v-input";
 
 export default {
   name: "v-form",

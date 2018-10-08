@@ -24,6 +24,7 @@ import axios from "@/helpers/shortUrlToServer";
 import VForm from "@/components/v-form";
 import VAlert from "@/components/v-alert";
 import VButton from "@/components/v-button";
+import VModal from "@/components/v-modal";
 
 const emptyUser = {
   id: 0,
@@ -47,7 +48,8 @@ export default {
   components: {
     VForm,
     VAlert,
-    VButton
+    VButton,
+    VModal
   },
   data() {
     return {

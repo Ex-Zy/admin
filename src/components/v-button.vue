@@ -13,7 +13,7 @@ export default {
     type: {
       type: String,
       validator(val) {
-        return ["primary", "secondary", "danger"].includes(val);
+        return ["primary", "secondary", "success", "danger"].includes(val);
       }
     }
   }
@@ -41,6 +41,13 @@ export default {
   &:hover,
   &:focus {
     background: darken(#ff3d00, 5%);
+  }
+}
+.btn-success {
+  background: #4db6ac;
+  &:hover,
+  &:focus {
+    background: darken(#4db6ac, 5%);
   }
 }
 </style>
