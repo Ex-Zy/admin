@@ -12,9 +12,13 @@
       v-model="user"/>
     
     <div class="buttons-wrp">
-      <v-button type="danger" @click.native="removeUser">Delete</v-button>
+      <v-button type="danger" @click.native="activeModal = true">Delete</v-button>
       <v-button type="primary" @click.native="saveUser">Save</v-button>
     </div>
+
+    <v-modal
+      v-model="activeModal"
+      @confirm="removeUser" />
 
   </div>
 </template>
@@ -24,19 +28,22 @@ import axios from "@/helpers/shortUrlToServer";
 import VForm from "@/components/v-form";
 import VAlert from "@/components/v-alert";
 import VButton from "@/components/v-button";
+import VModal from "@/components/v-modal";
 
 export default {
   name: "Edit",
   components: {
     VForm,
     VAlert,
-    VButton
+    VButton,
+    VModal
   },
   data() {
     return {
       user: null,
       alertMessage: "Loading user data...",
-      alertType: "warning"
+      alertType: "warning",
+      activeModal: false
     };
   },
   mounted() {

@@ -1,16 +1,20 @@
 <template>
-  <div class="modal">
-    <div class="modal__overlay"></div>
+  <div class="modal" v-if="active">
+    <div class="modal__overlay" @click="cancelButtonHandler"></div>
     <div class="modal__dialog">
       <div class="modal__top">
-        <h4>Confirmation</h4>
+        <h4>
+          <slot name="header">
+            Confirmation
+          </slot>
+        </h4>
       </div>
       <div class="modal__body">
-        Are you sure?
+        <slot name="body">Are you sure?</slot>
       </div>
       <div class="modal__bottom">
-        <v-button type="secondary">Cancel</v-button>
-        <v-button type="primary">Ok</v-button>
+        <v-button type="secondary" @click.native="cancelButtonHandler">No</v-button>
+        <v-button type="primary" @click.native="confirmButtonHandler">Yes</v-button>
       </div>
     </div>
   </div>
@@ -23,6 +27,24 @@ export default {
   name: "v-modal",
   components: {
     VButton
+  },
+  model: {
+    prop: "active",
+    event: "hidden"
+  },
+  props: {
+    active: {
+      type: Boolean,
+      required: true
+    }
+  },
+  methods: {
+    cancelButtonHandler() {
+      this.$emit("hidden", false);
+    },
+    confirmButtonHandler() {
+      this.$emit("confirm");
+    }
   }
 };
 </script>
@@ -36,7 +58,7 @@ export default {
   width: 100%;
   height: 100%;
   max-height: none;
-  display: none;
+  display: block;
   background: none;
   color: rgba(0, 0, 0, 0.87);
   line-height: 1.6;
@@ -49,6 +71,7 @@ export default {
     top: 0;
     left: 0;
     background: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
   }
   &__dialog {
     width: 60%;

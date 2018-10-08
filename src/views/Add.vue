@@ -9,12 +9,23 @@
 
     <v-form
       v-else
-      v-model="user"/>
+      v-model="user" />
 
     <div class="buttons-wrp">
       <v-button type="secondary" @click.native="resetUser">Cancel</v-button>
-      <v-button type="primary" @click.native="saveUser">Save</v-button>
+      <v-button type="primary" @click.native="activeModal = true">Save</v-button>
     </div>
+
+    <v-modal
+      v-model="activeModal"
+      @confirm="saveUser">
+        <template slot="header">
+          Add
+        </template>
+        <template slot="body">
+          Do you want to add this user?
+        </template>
+    </v-modal>
 
   </div>
 </template>
@@ -55,7 +66,8 @@ export default {
     return {
       user: null,
       alertMessage: "Loading user data...",
-      alertType: "warning"
+      alertType: "warning",
+      activeModal: false
     };
   },
   mounted() {
@@ -74,7 +86,7 @@ export default {
       axios
         .post("/users", this.user)
         .then(() => {
-          console.info("Пользователь создан успешно");
+          console.info("Пользователь успешно создан");
           this.redirectToUsers();
         })
         .catch(e => console.error(e));
