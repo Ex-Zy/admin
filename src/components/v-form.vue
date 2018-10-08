@@ -6,16 +6,19 @@
     <v-input id="mail" type="email" v-model="localUser.email" label="Email"/>
     <v-input id="phone" v-model="localUser.phone" label="Phone"/>
     <v-input id="address" v-model="localUser.address" label="Address"/>
+    <v-checkbox id="active-user" v-model="localUser.isActive" title="Active"/>
   </div>
 </template>
 
 <script>
 import VInput from "@/components/v-input";
+import VCheckbox from "@/components/v-checkbox";
 
 export default {
   name: "v-form",
   components: {
-    VInput
+    VInput,
+    VCheckbox
   },
   model: {
     prop: "user",
