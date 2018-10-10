@@ -1,8 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Users from "@/views/Users.vue";
-import Edit from "@/views/Edit.vue";
-import Add from "@/views/Add.vue";
+import Users from "@/views/Users";
+import Edit from "@/views/Edit";
+import Add from "@/views/Add";
+import Home from "@/views/Home";
 
 Vue.use(Router);
 
@@ -11,6 +12,11 @@ export default new Router({
   linkActiveClass: "active",
   linkExactActiveClass: "exact",
   routes: [
+    {
+      path: "/",
+      name: "home",
+      component: Home
+    },
     {
       path: "/edit/:id",
       name: "edit",
