@@ -2,7 +2,7 @@
   <nav class="light-blue darken-4">
     <div class="nav-wrapper">
       <router-link to="/" class="brand-logo">App</router-link>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <ul id="nav-mobile" class="right">
         <router-link
           v-for="link in links"
           :key="link.path"

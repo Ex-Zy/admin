@@ -4,7 +4,7 @@
            class="input-checkbox__item"
            :id="id"
            :checked="value"
-           @change="$emit('change', $event.target.checked)" />
+           @change="updateValue"/>
     <span class="input-checkbox__text">{{title}}</span>
   </label>
 </template>
@@ -26,6 +26,11 @@ export default {
     value: {
       type: Boolean,
       required: true
+    }
+  },
+  methods: {
+    updateValue(e) {
+      this.$emit("change", e.target.checked);
     }
   }
 };
