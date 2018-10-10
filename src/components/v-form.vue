@@ -6,6 +6,7 @@
     <v-input id="mail" type="email" v-model="localUser.email" label="Email"/>
     <v-input id="phone" v-model="localUser.phone" label="Phone"/>
     <v-input id="address" v-model="localUser.address" label="Address"/>
+    <v-select v-model="localUser.accessLevel" :list="accessLevelList" label="Account" placeholder="Select..."/>
     <v-checkbox id="active-user" v-model="localUser.isActive" title="Active"/>
   </div>
 </template>
@@ -13,10 +14,12 @@
 <script>
 import VInput from "@/components/v-input";
 import VCheckbox from "@/components/v-checkbox";
+import VSelect from "@/components//v-select";
 
 export default {
   name: "v-form",
   components: {
+    VSelect,
     VInput,
     VCheckbox
   },
@@ -35,7 +38,12 @@ export default {
   },
   data() {
     return {
-      localUser: null
+      localUser: null,
+      accessLevelList: [
+        { title: "Admin", value: "admin" },
+        { title: "User", value: "user" },
+        { title: "Guest", value: "guest" }
+      ]
     };
   },
   watch: {
