@@ -1,7 +1,7 @@
 <template>
   <div class="select">
-    <label>{{label}}</label>
     <select
+      :id="id"
       class="select__list browser-default"
       :value="selected"
       @change="updateValue">
@@ -13,6 +13,7 @@
         {{item.title}}
       </option>
     </select>
+    <label>{{label}}</label>
   </div>
 </template>
 
@@ -37,7 +38,12 @@ export default {
       requred: true
     },
     placeholder: {
-      type: String
+      type: String,
+      default: "Select.."
+    },
+    id: {
+      type: String,
+      requred: true
     }
   },
   methods: {
@@ -52,5 +58,7 @@ export default {
 .select {
   position: relative;
   margin: 1rem 0;
+  display: flex;
+  flex-direction: column-reverse;
 }
 </style>
